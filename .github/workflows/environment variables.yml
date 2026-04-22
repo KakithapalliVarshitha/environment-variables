@@ -1,0 +1,27 @@
+name: Environment Variable Example
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  APP_NAME: sample-app
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      BUILD_ENV: dev
+
+    steps:
+      - name: Print variables
+        run: |
+          echo "App: $APP_NAME"
+          echo "Environment: $BUILD_ENV"
+
+      - name: Set runtime variable
+        run: echo "VERSION=2.0" >> $GITHUB_ENV
+
+      - name: Use runtime variable
+        run: echo "Version is $VERSION"
